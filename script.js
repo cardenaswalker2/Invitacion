@@ -313,4 +313,27 @@ document.addEventListener('DOMContentLoaded', () => {
             window.open(googleCalendarUrl, '_blank');
         });
     }
+
+    // 10. WHATSAPP RSVP HANDLER WITH CUSTOM GUEST NAME
+    const rsvpBtn = document.getElementById('rsvp-btn');
+    const guestNameInput = document.getElementById('guest-name-input');
+    
+    if (rsvpBtn) {
+        rsvpBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const guestName = guestNameInput ? guestNameInput.value.trim() : '';
+            
+            if (!guestName) {
+                alert("Por favor, escribe tu nombre completo para confirmar tu asistencia 💕");
+                if (guestNameInput) guestNameInput.focus();
+                return;
+            }
+            
+            const phoneNumber = "573006663273"; // Colombia (57) prefix + 3006663273
+            const message = `¡Hola! Confirmo con mucha alegría mi asistencia al cumpleaños de Janelle Sarah 🍓. Mi nombre es: *${guestName}*. ¡Nos vemos pronto! ✨`;
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            
+            window.open(whatsappUrl, '_blank');
+        });
+    }
 });
