@@ -204,7 +204,7 @@ body {
     border-left: calc(var(--env-w) / 2) solid transparent;
     border-right: calc(var(--env-w) / 2) solid transparent;
     border-bottom: calc(var(--env-h) * 0.54) solid #ffccd6;
-    z-index: 3;
+    z-index: 4; /* On top of the preview card (z-index 3) */
 }
 
 .envelope-back::before {
@@ -272,7 +272,7 @@ body {
     background-color: #FFFFFF;
     border-radius: 8px;
     border: 2px dashed var(--color-primary-pink);
-    z-index: 2; /* Sit inside/behind the bottom fold (z-index 3) */
+    z-index: 3; /* Sit between side folds (z-index 2) and bottom fold (z-index 4) */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -320,7 +320,7 @@ body {
 
 .envelope.open .envelope-invitation-preview {
     transform: translateY(-100px) scale(1.05);
-    z-index: 7; /* Bring above the envelope folds */
+    z-index: 5; /* Bring above the bottom envelope fold (z-index 4) */
 }
 
 .envelope-container.collapsed {
