@@ -329,7 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             
-            const phoneNumber = "573006663273"; // Colombia (57) prefix + 3006663273
+            const phoneNumber = "573122488033"; // Colombia (57) prefix + 3122488033
             const message = `¡Hola! Confirmo con mucha alegría mi asistencia al cumpleaños de Janelle Sarah 🍓. Mi nombre es: *${guestName}*. ¡Nos vemos pronto! ✨`;
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             
