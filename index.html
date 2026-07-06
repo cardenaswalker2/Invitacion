@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Mi Dulce Invitación! - Janelle Sarah</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Great+Vibes&family=Outfit:wght@300..600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Style -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Background Music Audio Element -->
+    <audio id="bg-music" src="rosita.mp3" loop></audio>
+
+    <!-- Background Decoration Particles Container -->
+    <div class="decorations-container" id="decorations-container"></div>
+
+    <!-- Background Music Controller -->
+    <button class="music-toggle-btn" id="music-toggle-btn" aria-label="Activar música">
+        <i class="fas fa-volume-mute"></i>
+        <span class="music-pulse"></span>
+    </button>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Main Container: Envelope & Card Wrapper -->
+    <main class="invitation-wrapper">
+        
+        <!-- SECTION 1: Interactive Envelope -->
+        <div class="envelope-container" id="envelope-container">
+            <div class="envelope" id="envelope">
+                <div class="envelope-front"></div>
+                <div class="envelope-back"></div>
+                <div class="envelope-flap" id="envelope-flap"></div>
+                <div class="envelope-seal" id="envelope-seal">
+                    <div class="seal-strawberry">🍓</div>
+                </div>
+                <div class="envelope-invitation-preview">
+                    <p class="preview-text">¡Para Ti!</p>
+                </div>
+                <div class="envelope-instruction">
+                    <p><i class="fas fa-hand-pointer animate-tap"></i> Toca el sello para abrir la invitación mágica</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: The Magic Card (Revealed after opening) -->
+        <div class="card-container hidden" id="card-container">
+            <div class="card" id="tilt-card">
+                
+                <!-- Card Header Decoration -->
+                <div class="card-header-decor">
+                    <span class="strawberry-decor left-strawberry">🍓</span>
+                    <span class="strawberry-decor right-strawberry">🍓</span>
+                </div>
+
+                <!-- Storybook Border / Decorative Frame -->
+                <div class="card-frame-border"></div>
+
+                <!-- Card Content -->
+                <div class="card-content">
+                    
+                    <!-- Cover / Intro -->
+                    <header class="card-section intro-section animate-on-scroll">
+                        <!-- Sweet Strawberry Shortcake Hat SVG Illustration -->
+                        <div class="illustration-hat-container">
+                            <svg viewBox="0 0 160 120" class="svg-hat">
+                                <defs>
+                                    <radialGradient id="hat-pink" cx="50%" cy="30%" r="70%">
+                                        <stop offset="0%" stop-color="#ffb7c5" />
+                                        <stop offset="100%" stop-color="#ff3b5c" />
+                                    </radialGradient>
+                                </defs>
+                                <!-- Brim of the hat -->
+                                <ellipse cx="80" cy="85" rx="65" ry="12" fill="#ff5271" stroke="#ff3b5c" stroke-width="2"/>
+                                <!-- Dome/Cap -->
+                                <path d="M30 75 C30 25, 130 25, 130 75 Z" fill="url(#hat-pink)"/>
+                                <!-- Hat Band -->
+                                <path d="M32 73 C50 82, 110 82, 128 73 L129 78 C110 87, 50 87, 31 78 Z" fill="#FFFFFF"/>
+                                <!-- Green strawberry leaves decoration on band -->
+                                <path d="M80 72 L86 64 L74 64 Z" fill="#4CAF50"/>
+                                <path d="M80 72 L83 60 L77 60 Z" fill="#81C784"/>
+                                <circle cx="80" cy="74" r="4" fill="#ff3b5c"/>
+                                <!-- White dots on the hat -->
+                                <circle cx="55" cy="48" r="4.5" fill="#FFFFFF"/>
+                                <circle cx="75" cy="40" r="4" fill="#FFFFFF"/>
+                                <circle cx="105" cy="48" r="4.5" fill="#FFFFFF"/>
+                                <circle cx="65" cy="62" r="5" fill="#FFFFFF"/>
+                                <circle cx="95" cy="62" r="4" fill="#FFFFFF"/>
+                            </svg>
+                        </div>
+                        <p class="pre-title">¡Estás cordialmente invitado(a)!</p>
+                        <h1 class="birthday-girl-name">Janelle Sarah</h1>
+                        <h2 class="birthday-girl-lastname">Martínez Solano</h2>
+                        <div class="age-badge-wrapper">
+                            <span class="age-badge">¡Mis Dulces 5 Añitos!</span>
+                        </div>
+                    </header>
+
+                    <!-- Beautiful Invitation Message -->
+                    <section class="card-section message-section animate-on-scroll">
+                        <div class="fairy-tale-frame">
+                            <p class="welcome-text">
+                                Un año más de vida llega lleno de dulzura y alegría.
+                                Quiero celebrar este día tan especial rodeada de risas,
+                                fresitas y la mejor compañía: ¡la tuya!
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Strawberry Shortcake Theming Note -->
+                    <section class="card-section theme-section animate-on-scroll">
+                        <div class="theme-badge">
+                            <i class="fa-solid fa-cake-candles"></i> Temática: Rosita Fresita 🍓
+                        </div>
+                    </section>
+
+                    <!-- Event Details (Date, Time, Place) -->
+                    <section class="card-section details-section animate-on-scroll">
+                        <div class="details-grid">
+                            <!-- Date Card -->
+                            <div class="detail-card">
+                                <div class="detail-icon"><i class="far fa-calendar-alt"></i></div>
+                                <h3>Fecha</h3>
+                                <p class="detail-val">Viernes</p>
+                                <p class="detail-main">26 de Julio</p>
+                            </div>
+                            
+                            <!-- Time Card -->
+                            <div class="detail-card">
+                                <div class="detail-icon"><i class="far fa-clock"></i></div>
+                                <h3>Hora</h3>
+                                <p class="detail-val">Tarde dulce</p>
+                                <p class="detail-main">5:00 p. m.</p>
+                            </div>
+
+                            <!-- Place Card -->
+                            <div class="detail-card full-width">
+                                <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                <h3>Lugar</h3>
+                                <p class="detail-main">Mi Residencia</p>
+                                <p class="detail-sub">¡Ven a divertirte con nosotros!</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Countdown Timer -->
+                    <section class="card-section countdown-section animate-on-scroll">
+                        <h4 class="section-subtitle">Días para el gran momento:</h4>
+                        <div class="countdown-container" id="countdown">
+                            <div class="countdown-item">
+                                <span class="countdown-num" id="days">00</span>
+                                <span class="countdown-label">Días</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-num" id="hours">00</span>
+                                <span class="countdown-label">Horas</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-num" id="minutes">00</span>
+                                <span class="countdown-label">Min</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-num" id="seconds">00</span>
+                                <span class="countdown-label">Seg</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Fun statement section -->
+                    <section class="card-section fun-statement animate-on-scroll">
+                        <div class="fun-bubble">
+                            <p>"Será un día lleno de diversión, risas, juegos y muchas sorpresas." 🎈✨</p>
+                        </div>
+                    </section>
+
+                    <!-- Interactive Gallery -->
+                    <section class="card-section gallery-section animate-on-scroll">
+                        <h4 class="section-subtitle">Nuestra Dulce Galería</h4>
+                        <div class="gallery-slider">
+                            <div class="slides-container" id="slides-container">
+                                <!-- Slides with high-quality SVGs -->
+                                <div class="slide active">
+                                    <div class="slide-svg-decor">
+                                        <svg viewBox="0 0 100 100" class="illustration-svg">
+                                            <defs>
+                                                <radialGradient id="berry-grad" cx="40%" cy="40%" r="60%">
+                                                    <stop offset="0%" stop-color="#ff7b93" />
+                                                    <stop offset="70%" stop-color="#ff3b5c" />
+                                                    <stop offset="100%" stop-color="#c61030" />
+                                                </radialGradient>
+                                            </defs>
+                                            <path d="M50 15 C58 15, 75 22, 75 50 C75 75, 65 90, 50 92 C35 90, 25 75, 25 50 C25 22, 42 15, 50 15 Z" fill="url(#berry-grad)"/>
+                                            <path d="M50 20 L58 8 L48 14 L38 8 L44 20 L50 20 Z" fill="#4CAF50"/>
+                                            <path d="M50 20 L53 5 L47 11 L43 5 L47 20 Z" fill="#81C784"/>
+                                            <circle cx="40" cy="35" r="2" fill="#FFE082"/>
+                                            <circle cx="60" cy="35" r="2" fill="#FFE082"/>
+                                            <circle cx="50" cy="45" r="2" fill="#FFE082"/>
+                                            <circle cx="35" cy="55" r="2" fill="#FFE082"/>
+                                            <circle cx="65" cy="55" r="2" fill="#FFE082"/>
+                                            <circle cx="45" cy="65" r="2" fill="#FFE082"/>
+                                            <circle cx="55" cy="65" r="2" fill="#FFE082"/>
+                                            <circle cx="50" cy="78" r="2" fill="#FFE082"/>
+                                        </svg>
+                                    </div>
+                                    <p class="slide-caption">¡Dulces momentos!</p>
+                                </div>
+                                <div class="slide">
+                                    <div class="slide-svg-decor">
+                                        <svg viewBox="0 0 100 100" class="illustration-svg">
+                                            <circle cx="50" cy="50" r="14" fill="#FFD54F"/>
+                                            <circle cx="50" cy="22" r="15" fill="#FFF0F2" stroke="#FFB7C5" stroke-width="2"/>
+                                            <circle cx="50" cy="78" r="15" fill="#FFF0F2" stroke="#FFB7C5" stroke-width="2"/>
+                                            <circle cx="22" cy="50" r="15" fill="#FFF0F2" stroke="#FFB7C5" stroke-width="2"/>
+                                            <circle cx="78" cy="50" r="15" fill="#FFF0F2" stroke="#FFB7C5" stroke-width="2"/>
+                                            <circle cx="30" cy="30" r="15" fill="#FFF0F2" stroke="#FFB7C5" stroke-width="2"/>
+                                            <circle cx="70" cy="70" r="15" fill="#FFF0F2" stroke="#FFB7C5" stroke-width="2"/>
+                                            <circle cx="30" cy="70" r="15" fill="#FFF0F2" stroke="#FFB7C5" stroke-width="2"/>
+                                            <circle cx="70" cy="30" r="15" fill="#FFF0F2" stroke="#FFB7C5" stroke-width="2"/>
+                                            <circle cx="50" cy="50" r="10" fill="#FFB7C5"/>
+                                        </svg>
+                                    </div>
+                                    <p class="slide-caption">¡Risas y Diversión!</p>
+                                </div>
+                            </div>
+                            <div class="slider-controls">
+                                <button class="slider-btn prev-btn" id="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                                <button class="slider-btn next-btn" id="next-btn"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Interactive Action Buttons -->
+                    <footer class="card-section actions-section animate-on-scroll">
+                        <div class="actions-container">
+                            <a href="https://wa.me/50688888888?text=Hola%21%20Confirmo%20con%20mucha%20alegr%C3%ADa%20mi%20asistencia%20al%20cumplea%C3%B1os%20de%20Janelle%20Sarah%20%F0%9F%8D%93" target="_blank" class="action-btn rsvp-btn">
+                                <i class="fab fa-whatsapp"></i> Confirmar Asistencia (RSVP)
+                            </a>
+                            <a href="https://maps.google.com/?q=Mi+Casa+Residencial" target="_blank" class="action-btn maps-btn">
+                                <i class="fas fa-map-marked-alt"></i> Ver en Google Maps
+                            </a>
+                            <button id="add-to-calendar-btn" class="action-btn calendar-btn">
+                                <i class="far fa-calendar-plus"></i> Agregar al Calendario
+                            </button>
+                        </div>
+                        <div class="footer-note animate-on-scroll">
+                            <p>¡Te esperamos con el corazón lleno de fresas! 🍓✨</p>
+                        </div>
+                    </footer>
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- JS Logic -->
+    <script src="script.js"></script>
+</body>
+</html>
