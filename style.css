@@ -446,20 +446,16 @@ body {
 }
 
 .birthday-girl-name {
-    font-family: var(--font-heading);
-    font-size: 2.8rem;
-    font-weight: 700;
+    font-family: 'Pacifico', cursive;
+    font-size: 2.3rem;
+    font-weight: normal;
     color: var(--color-strawberry);
-    text-shadow: 2px 2px 0px var(--color-primary-pink-light);
-    margin-top: 5px;
-}
-
-.birthday-girl-lastname {
-    font-family: var(--font-heading);
-    font-size: 1.6rem;
-    font-weight: 500;
-    color: var(--color-text-light);
-    margin-bottom: 15px;
+    text-shadow: 2px 2px 0px rgba(255, 183, 197, 0.4);
+    margin-top: 10px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    padding: 0 10px;
+    letter-spacing: 0.5px;
 }
 
 .age-badge-wrapper {
