@@ -33,22 +33,96 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     setInterval(createFloatingParticle, 2000);
 
-    // 2. ENVELOPE INTERACTION & CONFETTI
+    // 2. ENVELOPE INTERACTION & CONFETTI WITH BELLS & SPARKLES
     const envelope = document.getElementById('envelope');
     const envelopeContainer = document.getElementById('envelope-container');
     const cardContainer = document.getElementById('card-container');
     
+    function playBellSound() {
+        try {
+            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContextClass) return;
+            const audioCtx = new AudioContextClass();
+            const now = audioCtx.currentTime;
+            
+            // Magical chime note frequencies (C6, E6, G6, C7, E7)
+            const freqs = [1046.50, 1318.51, 1567.98, 2093.00, 2637.02];
+            
+            freqs.forEach((freq, idx) => {
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+                
+                // Attack & decay envelope for chime sound
+                gainNode.gain.setValueAtTime(0, now + idx * 0.08);
+                gainNode.gain.linearRampToValueAtTime(0.2, now + idx * 0.08 + 0.02);
+                gainNode.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.08 + 1.2);
+                
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                
+                osc.start(now + idx * 0.08);
+                osc.stop(now + idx * 0.08 + 1.3);
+            });
+        } catch (e) {
+            console.log("AudioContext chime failed to play:", e);
+        }
+    }
+
+    function createSparkles(x, y) {
+        const emojis = ['✨', '⭐', '🌸', '💖', '🍓'];
+        const numSparkles = 35;
+        for (let i = 0; i < numSparkles; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            sparkle.style.left = x + 'px';
+            sparkle.style.top = y + 'px';
+            
+            // Random direction distances
+            const tx = (Math.random() - 0.5) * 400;
+            const ty = (Math.random() - 0.5) * 400;
+            const scale = 0.5 + Math.random() * 1.5;
+            
+            sparkle.style.setProperty('--tx', `${tx}px`);
+            sparkle.style.setProperty('--ty', `${ty}px`);
+            sparkle.style.setProperty('--s', scale);
+            
+            sparkle.style.animationDelay = `${Math.random() * 0.15}s`;
+            
+            document.body.appendChild(sparkle);
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1200);
+        }
+    }
+
     if (envelope) {
         envelope.addEventListener('click', () => {
             if (!envelope.classList.contains('open')) {
                 envelope.classList.add('open');
+                
+                // Play magical bell sound
+                playBellSound();
+                
+                // Calculate seal coordinates for sparkle origin
+                const rect = envelope.getBoundingClientRect();
+                const x = rect.left + rect.width / 2;
+                const y = rect.top + rect.height / 2;
+                
+                // Create sparkling trail
+                setTimeout(() => {
+                    createSparkles(x, y);
+                }, 200);
                 
                 // Trigger confetti
                 setTimeout(() => {
                     startConfetti();
                 }, 600);
                 
-                // Fade out envelope and reveal card
+                // Fade out envelope and reveal card with extra delay to enjoy animation
                 setTimeout(() => {
                     if (envelopeContainer) envelopeContainer.classList.add('collapsed');
                     if (cardContainer) {
@@ -58,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             handleScrollReveal();
                         }, 100);
                     }
-                }, 1500);
+                }, 2200); // Delayed slightly to let sparkles/confetti burst first
             }
         });
     }
@@ -267,11 +341,12 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // 7. INTERACTIVE GALLERY SLIDER
+    // 7. INTERACTIVE GALLERY SLIDER WITH AUTOMATIC TRANSITION
     const slides = document.querySelectorAll('.slide');
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
     let currentSlide = 0;
+    let slideInterval;
 
     function showSlide(index) {
         if (slides.length === 0) return;
@@ -280,8 +355,32 @@ document.addEventListener('DOMContentLoaded', () => {
         slides[currentSlide].classList.add('active');
     }
 
-    if (prevBtn) prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
-    if (nextBtn) nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+    function startSlideShow() {
+        slideInterval = setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 4000);
+    }
+
+    function resetSlideShow() {
+        clearInterval(slideInterval);
+        startSlideShow();
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            showSlide(currentSlide - 1);
+            resetSlideShow();
+        });
+    }
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            showSlide(currentSlide + 1);
+            resetSlideShow();
+        });
+    }
+
+    // Start auto transition initially
+    startSlideShow();
 
     // 8. SCROLL REVEAL ANIMATIONS
     const animElements = document.querySelectorAll('.animate-on-scroll');
@@ -334,6 +433,39 @@ document.addEventListener('DOMContentLoaded', () => {
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             
             window.open(whatsappUrl, '_blank');
+        });
+    }
+
+    // 11. LIGHTBOX MODAL FOR GALLERY ZOOM
+    const lightboxModal = document.getElementById('lightbox-modal');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const zoomableImages = document.querySelectorAll('.zoomable');
+
+    zoomableImages.forEach(img => {
+        img.addEventListener('click', () => {
+            if (lightboxModal && lightboxImg) {
+                lightboxImg.src = img.src;
+                if (lightboxCaption) {
+                    lightboxCaption.textContent = img.nextElementSibling ? img.nextElementSibling.textContent : '';
+                }
+                lightboxModal.classList.add('show');
+            }
+        });
+    });
+
+    if (lightboxClose) {
+        lightboxClose.addEventListener('click', () => {
+            if (lightboxModal) lightboxModal.classList.remove('show');
+        });
+    }
+
+    if (lightboxModal) {
+        lightboxModal.addEventListener('click', (e) => {
+            if (e.target === lightboxModal) {
+                lightboxModal.classList.remove('show');
+            }
         });
     }
 });

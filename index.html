@@ -128,6 +128,37 @@
                         </div>
                     </section>
 
+                    <!-- Highlights / What's at the party -->
+                    <section class="card-section highlights-section animate-on-scroll">
+                        <h4 class="section-subtitle">Lo que tendremos:</h4>
+                        <div class="highlights-grid">
+                            <div class="highlight-item">
+                                <div class="highlight-icon">🍰</div>
+                                <span class="highlight-label">Torta</span>
+                            </div>
+                            <div class="highlight-item">
+                                <div class="highlight-icon">🍕</div>
+                                <span class="highlight-label">Comida</span>
+                            </div>
+                            <div class="highlight-item">
+                                <div class="highlight-icon">🥤</div>
+                                <span class="highlight-label">Bebidas</span>
+                            </div>
+                            <div class="highlight-item">
+                                <div class="highlight-icon">🎈</div>
+                                <span class="highlight-label">Juegos</span>
+                            </div>
+                            <div class="highlight-item">
+                                <div class="highlight-icon">🎁</div>
+                                <span class="highlight-label">Sorpresas</span>
+                            </div>
+                            <div class="highlight-item">
+                                <div class="highlight-icon">📸</div>
+                                <span class="highlight-label">Fotos</span>
+                            </div>
+                        </div>
+                    </section>
+
                     <!-- Countdown Timer -->
                     <section class="card-section countdown-section animate-on-scroll">
                         <h4 class="section-subtitle">Días para el gran momento:</h4>
@@ -165,19 +196,19 @@
                             <div class="slides-container" id="slides-container">
                                 <!-- Slides with local Rosita Fresita images -->
                                 <div class="slide active">
-                                    <img src="rosita1.png" class="slide-img" alt="Rosita Fresita 1">
+                                    <img src="rosita1.png" class="slide-img zoomable" alt="Rosita Fresita 1">
                                     <p class="slide-caption">¡Dulces momentos!</p>
                                 </div>
                                 <div class="slide">
-                                    <img src="rosita2.png" class="slide-img" alt="Rosita Fresita 2">
+                                    <img src="rosita2.png" class="slide-img zoomable" alt="Rosita Fresita 2">
                                     <p class="slide-caption">¡Risas y Diversión!</p>
                                 </div>
                                 <div class="slide">
-                                    <img src="rosita3.png" class="slide-img" alt="Rosita Fresita 3">
+                                    <img src="rosita3.png" class="slide-img zoomable" alt="Rosita Fresita 3">
                                     <p class="slide-caption">¡Muchos juegos!</p>
                                 </div>
                                 <div class="slide">
-                                    <img src="rosita4.jpg" class="slide-img" alt="Rosita Fresita 4">
+                                    <img src="rosita4.jpg" class="slide-img zoomable" alt="Rosita Fresita 4">
                                     <p class="slide-caption">¡Sorpresas mágicas!</p>
                                 </div>
                             </div>
@@ -185,6 +216,28 @@
                                 <button class="slider-btn prev-btn" id="prev-btn"><i class="fas fa-chevron-left"></i></button>
                                 <button class="slider-btn next-btn" id="next-btn"><i class="fas fa-chevron-right"></i></button>
                             </div>
+                        </div>
+                    </section>
+
+                    <!-- Parents Message Section -->
+                    <section class="card-section parents-message-section animate-on-scroll">
+                        <div class="parents-card">
+                            <div class="parents-heart">❤️</div>
+                            <h4 class="parents-title">Un mensaje de sus papitos</h4>
+                            <p class="parents-text">
+                                "Con mucho amor queremos compartir este día tan especial contigo. Tu presencia será el regalo más hermoso para nuestra pequeña."
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Gift Suggestion Section -->
+                    <section class="card-section gifts-section animate-on-scroll">
+                        <div class="gift-card">
+                            <div class="gift-icon-bubble">🎁</div>
+                            <h4 class="gift-title">Lluvia de Sobres</h4>
+                            <p class="gift-text">
+                                "Tu compañía es nuestro mejor regalo. Pero si deseas tener un detalle con nuestra pequeña, el obsequio será recibido con mucho cariño."
+                            </p>
                         </div>
                     </section>
 
@@ -215,6 +268,13 @@
         </div>
 
     </main>
+
+    <!-- Lightbox Modal for Gallery Images -->
+    <div id="lightbox-modal" class="lightbox">
+        <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" alt="Vista ampliada">
+        <div id="lightbox-caption" class="lightbox-caption"></div>
+    </div>
 
     <!-- JS Logic -->
     <script src="script.js?v=1.1"></script>
