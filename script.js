@@ -448,7 +448,21 @@ document.addEventListener('DOMContentLoaded', () => {
             if (lightboxModal && lightboxImg) {
                 lightboxImg.src = img.src;
                 if (lightboxCaption) {
-                    lightboxCaption.textContent = img.nextElementSibling ? img.nextElementSibling.textContent : '';
+                    let captionText = '';
+                    if (img.nextElementSibling) {
+                        captionText = img.nextElementSibling.textContent;
+                    } else {
+                        // Look for a caption within a parent container
+                        const parentContainer = img.closest('.portrait-frame-container');
+                        if (parentContainer) {
+                            const capEl = parentContainer.querySelector('.portrait-caption');
+                            if (capEl) captionText = capEl.textContent;
+                        }
+                    }
+                    if (!captionText) {
+                        captionText = img.alt || '';
+                    }
+                    lightboxCaption.textContent = captionText;
                 }
                 lightboxModal.classList.add('show');
             }
